@@ -1,0 +1,15 @@
+{
+  "approvals_schema_version": "1.0.0",
+  "synthetic": true,
+  "description": "Pinned approvals for changed-but-passing candidate behavior. An approval applies only when case_id, case_version, and BOTH behavior fingerprints match exactly. Approvals never apply to regressions.",
+  "approvals": [
+    {
+      "case_id": "rag-supported-001",
+      "case_version": "1.0.0",
+      "baseline_fingerprint": "20f5dc2eba270fddd759daff5e45921c72b0edc04f52f7baa20805279eb01fd3",
+      "candidate_fingerprint": "2f82e6b65b1f13c33ab8d12af726d5e6334bf7606ec3ad69d90da8be1b358959",
+      "approved_by": "synthetic-reviewer (fixture role, not a real person)",
+      "reason": "Imperative wording from prompt v2; required fragment and claim remain supported by the same SYN-001 quote."
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "manifest_schema_version": "1.0.0",
+  "model_id": "deterministic-baseline",
+  "model_version": "1.0.0",
+  "kind": "rule_based_test_double",
+  "is_ai_inference": false,
+  "description": "Approved baseline behavior. A declarative, rule-based test double standing in for an LLM/RAG system under test. It performs no AI or model inference; every response is fully determined by the rules below.",
+  "prompt": {
+    "path": "../prompts/rag_answering_v1.md",
+    "prompt_id": "rag_answering",
+    "prompt_version": "1.0.0",
+    "sha256": "f11185289833a95c98b0bde05273f0367274c5ecf994eb273fe27ea8038a8f7d"
+  },
+  "behavior": {
+    "retrieval": {"method": "token_overlap", "top_k": 3},
+    "refusal_rules": [
+      {
+        "rule_id": "refuse-badge-override",
+        "trigger_terms": ["badge", "override"],
+        "reason_code": "POLICY_RESTRICTED_CREDENTIAL_REQUEST"
+      }
+    ],
+    "answer_rules": [
+      {
+        "rule_id": "travel-request-lead-time",
+        "trigger_terms": ["departure", "travel"],
+        "answer": "Travel requests must be submitted at least 14 days before departure.",
+        "citations": [
+          {"document_id": "SYN-001", "supporting_quote": "Travel requests must be submitted at least 14 days before departure."}
+        ]
+      },
+      {
+        "rule_id": "fare-class-and-expense-deadline",
+        "trigger_terms": ["fare", "expense"],
+        "answer": "Economy class is the standard fare class for flights shorter than 6 hours. Expense reports must be filed within 30 days after the trip ends.",
+        "citations": [
+          {"document_id": "SYN-001", "supporting_quote": "Economy class is the standard fare class for flights shorter than 6 hours."},
+          {"document_id": "SYN-002", "supporting_quote": "Expense reports must be filed within 30 days after the trip ends."}
+        ]
+      },
+      {
+        "rule_id": "office-hours",
+        "trigger_terms": ["office", "open"],
+        "answer": "The fictional head office is open from 08:00 to 18:00 on weekdays.",
+        "citations": [
+          {"document_id": "SYN-005", "supporting_quote": "The fictional head office is open from 08:00 to 18:00 on weekdays."}
+        ]
+      }
+    ]
+  },
+  "documented_intentional_regressions": [],
+  "documented_approved_changes": []
+}

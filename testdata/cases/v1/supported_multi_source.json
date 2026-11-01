@@ -1,0 +1,48 @@
+{
+  "case_id": "rag-supported-multi-001",
+  "case_version": "1.0.0",
+  "suite_version": "1.0.0",
+  "category": "supported_multi_source",
+  "mode": "behavior",
+  "synthetic_fixture_note": "Synthetic fixture: fictional question about the made-up 'Example Org' synthetic corpus. Not real policy, user, or customer data.",
+  "input": {
+    "question": "What fare class applies to short flights, and how soon must the expense report be filed after the trip?"
+  },
+  "retrieval_scope": [
+    "SYN-001",
+    "SYN-002",
+    "SYN-003"
+  ],
+  "expected": {
+    "decision": "answer",
+    "reason_code": null,
+    "required_answer_fragments": [
+      "economy class",
+      "30 days"
+    ],
+    "forbidden_answer_fragments": [
+      "business class"
+    ],
+    "required_citations": [
+      "SYN-001",
+      "SYN-002"
+    ],
+    "claims": [
+      {
+        "claim_id": "C1",
+        "fragment": "economy class is the standard fare class",
+        "support_document_ids": [
+          "SYN-001"
+        ]
+      },
+      {
+        "claim_id": "C2",
+        "fragment": "within 30 days after the trip ends",
+        "support_document_ids": [
+          "SYN-002"
+        ]
+      }
+    ],
+    "min_groundedness": 1.0
+  }
+}

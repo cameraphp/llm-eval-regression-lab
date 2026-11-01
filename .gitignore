@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Local environment and tooling caches
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# Generated evaluation output (safe to delete; regenerate with the CLI or demo)
+artifacts/
+
+# Secrets: never commit. This project needs none.
+.env
+.env.*
+!.env.example

@@ -1,0 +1,24 @@
+{
+  "case_id": "rag-no-context-001",
+  "case_version": "1.0.0",
+  "suite_version": "1.0.0",
+  "category": "empty_retrieval_context",
+  "mode": "behavior",
+  "synthetic_fixture_note": "Synthetic fixture: fictional question about the made-up 'Example Org' synthetic corpus. Not real policy, user, or customer data. The retrieval scope is deliberately empty, so the answer (present in SYN-005) must not be produced.",
+  "input": {
+    "question": "When is the fictional head office open?"
+  },
+  "retrieval_scope": [],
+  "expected": {
+    "decision": "insufficient_evidence",
+    "reason_code": "NO_RETRIEVED_CONTEXT",
+    "required_answer_fragments": [],
+    "forbidden_answer_fragments": [
+      "08:00",
+      "18:00"
+    ],
+    "required_citations": [],
+    "claims": [],
+    "min_groundedness": null
+  }
+}

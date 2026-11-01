@@ -1,0 +1,87 @@
+# Deterministic, offline validation of the synthetic evaluation lab.
+# Read-only token, no repository secrets, no artifacts, no caches, no deployment.
+# The only network use is pip retrieving the pinned dev tools from requirements-dev.lock;
+# the project itself makes no model, API, or inference calls (offline guard is enforced).
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Deterministic offline validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+
+      - name: Install pinned dev tools and the local project (no runtime dependencies)
+        run: |
+          python -m pip install --disable-pip-version-check -r requirements-dev.lock
+          python -m pip install --disable-pip-version-check --no-deps --no-build-isolation -e .
+
+      - name: Tests
+        run: python -m pytest -q
+
+      - name: Lint
+        run: python -m ruff check .
+
+      - name: Validate suite manifest
+        run: python -m llm_eval_regression_lab.cli validate-suite --suite testdata/cases/manifest.json
+
+      - name: Baseline run twice and byte-compare with the golden baseline
+        run: |
+          out="$RUNNER_TEMP/eval"
+          mkdir -p "$out"
+          python -m llm_eval_regression_lab.cli run --fixture baseline --suite testdata/cases/manifest.json --output "$out/baseline_run_1.json" --quiet
+          python -m llm_eval_regression_lab.cli run --fixture baseline --suite testdata/cases/manifest.json --output "$out/baseline_run_2.json" --quiet
+          cmp "$out/baseline_run_1.json" "$out/baseline_run_2.json"
+          cmp "$out/baseline_run_1.json" testdata/golden/baseline_results_v1.json
+          sha256sum "$out/baseline_run_1.json" "$out/baseline_run_2.json" testdata/golden/baseline_results_v1.json
+
+      - name: Candidate strict comparison must fail with the documented regressions (expected failure)
+        run: |
+          out="$RUNNER_TEMP/eval"
+          mkdir -p "$out"
+          set +e
+          python -m llm_eval_regression_lab.cli run --fixture candidate --suite testdata/cases/manifest.json --output "$out/candidate_run.json" --quiet
+          run_code=$?
+          python -m llm_eval_regression_lab.cli compare --baseline testdata/golden/baseline_results_v1.json --candidate "$out/candidate_run.json" --approvals testdata/approvals/candidate_v2_approvals.json --strict --output "$out/comparison.json"
+          compare_code=$?
+          set -e
+          echo "candidate run exit=$run_code; strict compare exit=$compare_code"
+          if [ "$run_code" -ne 1 ]; then
+            echo "::error::candidate run should exit 1 (intentional failing cases), got $run_code"
+            exit 1
+          fi
+          if [ "$compare_code" -eq 0 ]; then
+            echo "::error::strict comparison exited 0; the intentional regression is no longer detected"
+            exit 1
+          fi
+          if [ "$compare_code" -ne 1 ]; then
+            echo "::error::strict comparison exited $compare_code; expected the regression-gate exit code 1"
+            exit 1
+          fi
+          blocking=$(python -c "import json, sys; print(','.join(sorted(json.load(open(sys.argv[1]))['gate']['blocking_cases'])))" "$out/comparison.json")
+          if [ "$blocking" != "rag-insufficient-001,rag-supported-multi-001" ]; then
+            echo "::error::unexpected blocking cases: $blocking"
+            exit 1
+          fi
+          echo "Expected demonstration: strict comparison FAILED (exit 1) with blocking cases $blocking"
+
+      - name: Demo (baseline pass + expected candidate regression)
+        run: python scripts/run_demo.py --artifacts-dir "$RUNNER_TEMP/demo"

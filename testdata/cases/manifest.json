@@ -1,0 +1,35 @@
+{
+  "suite_id": "rag-regression-suite",
+  "suite_version": "1.0.0",
+  "synthetic": true,
+  "description": "Versioned synthetic regression suite. Every case file is pinned by canonical SHA-256. Changing an expected behavior requires a new case version file, a superseded status on the old entry, and a change_log entry; historical files are never edited or deleted.",
+  "corpus": {
+    "path": "../corpus/synthetic_corpus_v1.json",
+    "corpus_version": "synthetic-corpus-v1",
+    "sha256": "4fde3d7d31cb9c76c210bfc893411c0a8d8e9a4ab7475383d15e38241b34c3ea"
+  },
+  "cases": [
+    {"case_id": "rag-supported-001", "case_version": "1.0.0", "path": "v1/supported_single_source.json", "sha256": "8d2fdc84a4ebfb23bb05208c8a103699b692c4209f008da225b710dd22e1a80b", "status": "active"},
+    {"case_id": "rag-supported-multi-001", "case_version": "1.0.0", "path": "v1/supported_multi_source.json", "sha256": "a94956a6a124a40e5fa52d87809d53e1c92154fc248565efd7706c05910dc5a2", "status": "active"},
+    {"case_id": "rag-insufficient-001", "case_version": "1.0.0", "path": "v1/insufficient_evidence.json", "sha256": "8910bb53d743548c19f2b03e66e2191f114dc886dfe4c640c0740a964219b747", "status": "active"},
+    {"case_id": "rag-no-context-001", "case_version": "1.0.0", "path": "v1/no_context_insufficient_evidence.json", "sha256": "8a424359bb36d50b1d3f52004fcf83597d7d782bb4c0ac91242f05534df9bb1b", "status": "active"},
+    {"case_id": "rag-refusal-001", "case_version": "1.0.0", "path": "v1/policy_refusal.json", "sha256": "51797afe4a44e6e031629553fa3f1c8a3920f849ee837b77d39beb0f0e36c725", "status": "active"},
+    {"case_id": "rag-citation-scope-001", "case_version": "1.0.0", "path": "v1/citation_out_of_scope.json", "sha256": "4c181333841023cc391930f83b56bb8fe334c666a1e1f44a71bd620ae5125484", "status": "active"},
+    {"case_id": "rag-citation-fabrication-001", "case_version": "1.0.0", "path": "v1/citation_fabrication.json", "sha256": "2a3d874e31f4c2a25dea671f2a253f27f1443ebe0d07c3e35e5271968893a0b1", "status": "active"},
+    {"case_id": "rag-unsupported-claim-001", "case_version": "1.0.0", "path": "v1/unsupported_claim.json", "sha256": "fac06b31a18e719515c473c0885ea5166bcd8366a81ae8d45e247164c5338e12", "status": "active"},
+    {"case_id": "rag-malformed-001", "case_version": "1.0.0", "path": "v1/malformed_output.json", "sha256": "daeb203cc19ba5c0de81693173da3e1c7975699769807a320d661c090c46f0e4", "status": "active"},
+    {"case_id": "rag-version-mismatch-001", "case_version": "1.0.0", "path": "v1/version_mismatch.json", "sha256": "1e4f735a6f95b4a070fc43968c4c773180b9a41de27cff428e785162ccbfb79a", "status": "active"}
+  ],
+  "change_log": [
+    {"case_id": "rag-supported-001", "case_version": "1.0.0", "change": "added", "reason": "Initial suite: supported single-source answer with full fixture-bound groundedness."},
+    {"case_id": "rag-supported-multi-001", "case_version": "1.0.0", "change": "added", "reason": "Initial suite: two claims, each attributed to a different synthetic document."},
+    {"case_id": "rag-insufficient-001", "case_version": "1.0.0", "change": "added", "reason": "Initial suite: in-scope question with no synthetic evidence must yield insufficient_evidence."},
+    {"case_id": "rag-no-context-001", "case_version": "1.0.0", "change": "added", "reason": "Initial suite: empty retrieval context must yield a stable insufficient_evidence response."},
+    {"case_id": "rag-refusal-001", "case_version": "1.0.0", "change": "added", "reason": "Initial suite: synthetic policy-restricted request must be refused with a documented reason code."},
+    {"case_id": "rag-citation-scope-001", "case_version": "1.0.0", "change": "added", "reason": "Initial suite: negative control for an out-of-scope citation."},
+    {"case_id": "rag-citation-fabrication-001", "case_version": "1.0.0", "change": "added", "reason": "Initial suite: negative control for a valid document ID with an invented quote."},
+    {"case_id": "rag-unsupported-claim-001", "case_version": "1.0.0", "change": "added", "reason": "Initial suite: negative control for an unsupported additional claim."},
+    {"case_id": "rag-malformed-001", "case_version": "1.0.0", "change": "added", "reason": "Initial suite: negative control for malformed structured output."},
+    {"case_id": "rag-version-mismatch-001", "case_version": "1.0.0", "change": "added", "reason": "Initial suite: negative control for prompt/model version metadata mismatch."}
+  ]
+}

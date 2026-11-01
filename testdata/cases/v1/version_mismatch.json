@@ -1,0 +1,59 @@
+{
+  "case_id": "rag-version-mismatch-001",
+  "case_version": "1.0.0",
+  "suite_version": "1.0.0",
+  "category": "version_mismatch",
+  "mode": "negative_control",
+  "synthetic_fixture_note": "Synthetic negative control: an injected, deliberately bad response over the fictional 'Example Org' corpus. It proves the evaluator detects this failure class; it is not simulator output. Content is correct, but prompt_version and model_version claim 0.9.0, which matches no active manifest.",
+  "input": {
+    "question": "How many days before departure must a travel request be submitted?"
+  },
+  "retrieval_scope": [
+    "SYN-001"
+  ],
+  "expected": {
+    "decision": "answer",
+    "reason_code": null,
+    "required_answer_fragments": [
+      "14 days"
+    ],
+    "forbidden_answer_fragments": [
+      "30 days"
+    ],
+    "required_citations": [
+      "SYN-001"
+    ],
+    "claims": [
+      {
+        "claim_id": "C1",
+        "fragment": "at least 14 days before departure",
+        "support_document_ids": [
+          "SYN-001"
+        ]
+      }
+    ],
+    "min_groundedness": 1.0
+  },
+  "negative_control": {
+    "injected_response": {
+      "case_id": "rag-version-mismatch-001",
+      "decision": "answer",
+      "answer": "Travel requests must be submitted at least 14 days before departure.",
+      "citations": [
+        {
+          "document_id": "SYN-001",
+          "supporting_quote": "Travel requests must be submitted at least 14 days before departure."
+        }
+      ],
+      "reason_code": null,
+      "message": null,
+      "prompt_id": "<<ACTIVE>>",
+      "prompt_version": "0.9.0",
+      "model_id": "<<ACTIVE>>",
+      "model_version": "0.9.0"
+    },
+    "expected_failure_codes": [
+      "METADATA_MISMATCH"
+    ]
+  }
+}

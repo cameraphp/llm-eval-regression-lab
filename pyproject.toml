@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools==80.9.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "llm-eval-regression-lab"
+version = "1.0.0"
+description = "Offline, deterministic evaluation and regression controls for an LLM/RAG-style workflow, exercised with rule-based test doubles and a synthetic fixture suite."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+# Runtime: standard library only (NFR-003, SAFE-001).
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest==9.1.1",
+    "ruff==0.16.9",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = [".venv", "artifacts"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-p no:cacheprovider"

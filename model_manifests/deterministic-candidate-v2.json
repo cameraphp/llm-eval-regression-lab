@@ -1,0 +1,78 @@
+{
+  "manifest_schema_version": "1.0.0",
+  "model_id": "deterministic-candidate",
+  "model_version": "2.0.0",
+  "kind": "rule_based_test_double",
+  "is_ai_inference": false,
+  "description": "Candidate behavior for the regression demonstration. A declarative, rule-based test double (no AI or model inference). It is identical to the baseline except for the documented variants below, two of which are INTENTIONAL regressions that the comparator must surface.",
+  "prompt": {
+    "path": "../prompts/rag_answering_v2.md",
+    "prompt_id": "rag_answering",
+    "prompt_version": "2.0.0",
+    "sha256": "f5b3292040982bec707363376230b4ec2b2afe990aaaf64536f5eb60d06b40a9"
+  },
+  "behavior": {
+    "retrieval": {"method": "token_overlap", "top_k": 3},
+    "refusal_rules": [
+      {
+        "rule_id": "refuse-badge-override",
+        "trigger_terms": ["badge", "override"],
+        "reason_code": "POLICY_RESTRICTED_CREDENTIAL_REQUEST"
+      }
+    ],
+    "answer_rules": [
+      {
+        "rule_id": "travel-request-lead-time",
+        "trigger_terms": ["departure", "travel"],
+        "answer": "Submit the travel request at least 14 days before departure.",
+        "citations": [
+          {"document_id": "SYN-001", "supporting_quote": "Travel requests must be submitted at least 14 days before departure."}
+        ]
+      },
+      {
+        "rule_id": "fare-class-and-expense-deadline",
+        "trigger_terms": ["fare", "expense"],
+        "answer": "Economy class is the standard fare class for flights shorter than 6 hours. Expense reports must be filed within 30 days after the trip ends.",
+        "citations": [
+          {"document_id": "SYN-001", "supporting_quote": "Economy class is the standard fare class for flights shorter than 6 hours."},
+          {"document_id": "SYN-001", "supporting_quote": "Expense reports must be filed within 30 days after the trip ends."}
+        ]
+      },
+      {
+        "rule_id": "office-hours",
+        "trigger_terms": ["office", "open"],
+        "answer": "The fictional head office is open from 08:00 to 18:00 on weekdays.",
+        "citations": [
+          {"document_id": "SYN-005", "supporting_quote": "The fictional head office is open from 08:00 to 18:00 on weekdays."}
+        ]
+      },
+      {
+        "rule_id": "meal-allowance-guess",
+        "trigger_terms": ["diem", "meal"],
+        "answer": "The meal allowance is 40 synthetic credits per day.",
+        "citations": [
+          {"document_id": "SYN-001", "supporting_quote": "Hotel bookings must use the synthetic preferred-hotel list."}
+        ]
+      }
+    ]
+  },
+  "documented_intentional_regressions": [
+    {
+      "case_id": "rag-supported-multi-001",
+      "rule_id": "fare-class-and-expense-deadline",
+      "description": "Citation-attribution regression: the expense-deadline quote is attributed to SYN-001 instead of SYN-002, so the quote is not found, SYN-002 is not validly cited, and fixture-bound groundedness drops from 1.0 to 0.5."
+    },
+    {
+      "case_id": "rag-insufficient-001",
+      "rule_id": "meal-allowance-guess",
+      "description": "Answer-leakage regression: for an in-scope question with no supporting evidence, the candidate answers with an invented allowance instead of returning insufficient_evidence."
+    }
+  ],
+  "documented_approved_changes": [
+    {
+      "case_id": "rag-supported-001",
+      "rule_id": "travel-request-lead-time",
+      "description": "Wording change (imperative style per prompt v2). Still grounded; approved via testdata/approvals/candidate_v2_approvals.json pinned to both behavior fingerprints."
+    }
+  ]
+}

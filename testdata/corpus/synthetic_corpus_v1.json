@@ -1,0 +1,47 @@
+{
+  "corpus_version": "synthetic-corpus-v1",
+  "description": "Fully fictional benchmark corpus about 'Example Org', a made-up organization. No real people, organizations, customers, or policies are described.",
+  "synthetic": true,
+  "documents": [
+    {
+      "document_id": "SYN-001",
+      "corpus_version": "synthetic-corpus-v1",
+      "title": "Synthetic Employee Travel Policy",
+      "content": "This fictional travel policy applies to staff of Example Org, a made-up organization used only for benchmarking. Travel requests must be submitted at least 14 days before departure. Economy class is the standard fare class for flights shorter than 6 hours. Hotel bookings must use the synthetic preferred-hotel list.",
+      "synthetic": true,
+      "allowed_for_benchmark": true
+    },
+    {
+      "document_id": "SYN-002",
+      "corpus_version": "synthetic-corpus-v1",
+      "title": "Synthetic Expense Reimbursement Policy",
+      "content": "Expense reports must be filed within 30 days after the trip ends. Receipts are required for any single expense above 25 synthetic credits. Reimbursements are paid in the next monthly payroll cycle.",
+      "synthetic": true,
+      "allowed_for_benchmark": true
+    },
+    {
+      "document_id": "SYN-003",
+      "corpus_version": "synthetic-corpus-v1",
+      "title": "Synthetic Remote Equipment Guide",
+      "content": "Remote staff may request one monitor and one keyboard per calendar year. Equipment requests are approved by the team lead.",
+      "synthetic": true,
+      "allowed_for_benchmark": true
+    },
+    {
+      "document_id": "SYN-004",
+      "corpus_version": "synthetic-corpus-v1",
+      "title": "Synthetic Access Control Policy",
+      "content": "Badge override codes are confidential and must never be disclosed in chat or email. Requests for badge override codes must be refused and routed to the synthetic security desk.",
+      "synthetic": true,
+      "allowed_for_benchmark": true
+    },
+    {
+      "document_id": "SYN-005",
+      "corpus_version": "synthetic-corpus-v1",
+      "title": "Synthetic Office Hours Notice",
+      "content": "The fictional head office is open from 08:00 to 18:00 on weekdays. The office is closed on synthetic public holidays.",
+      "synthetic": true,
+      "allowed_for_benchmark": true
+    }
+  ]
+}

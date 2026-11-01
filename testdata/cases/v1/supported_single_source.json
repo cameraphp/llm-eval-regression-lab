@@ -1,0 +1,39 @@
+{
+  "case_id": "rag-supported-001",
+  "case_version": "1.0.0",
+  "suite_version": "1.0.0",
+  "category": "supported_single_source",
+  "mode": "behavior",
+  "synthetic_fixture_note": "Synthetic fixture: fictional question about the made-up 'Example Org' synthetic corpus. Not real policy, user, or customer data.",
+  "input": {
+    "question": "How many days before departure must a travel request be submitted?"
+  },
+  "retrieval_scope": [
+    "SYN-001",
+    "SYN-002",
+    "SYN-003"
+  ],
+  "expected": {
+    "decision": "answer",
+    "reason_code": null,
+    "required_answer_fragments": [
+      "14 days"
+    ],
+    "forbidden_answer_fragments": [
+      "30 days"
+    ],
+    "required_citations": [
+      "SYN-001"
+    ],
+    "claims": [
+      {
+        "claim_id": "C1",
+        "fragment": "at least 14 days before departure",
+        "support_document_ids": [
+          "SYN-001"
+        ]
+      }
+    ],
+    "min_groundedness": 1.0
+  }
+}

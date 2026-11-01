@@ -1,0 +1,910 @@
+{
+  "artifact_schema_version": "1.0.0",
+  "cases": [
+    {
+      "behavior_fingerprint": "0fc0efaa8a784b56be0b658cd787710b9ede345b1022acb409d32580f3df9a41",
+      "case_id": "rag-citation-fabrication-001",
+      "case_path": "v1/citation_fabrication.json",
+      "case_sha256": "2a3d874e31f4c2a25dea671f2a253f27f1443ebe0d07c3e35e5271968893a0b1",
+      "case_version": "1.0.0",
+      "category": "citation_fabrication",
+      "checks": [
+        {
+          "check_id": "schema",
+          "detail": "response matches the structured schema",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "invariants",
+          "detail": "decision invariants hold",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "case_id",
+          "detail": "expected rag-citation-fabrication-001, observed rag-citation-fabrication-001",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "metadata",
+          "detail": "prompt/model metadata matches active manifest",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "decision",
+          "detail": "expected answer, observed answer",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "citation:0",
+          "detail": "supporting_quote is not a normalized substring of SYN-001",
+          "failure_code": "CITATION_QUOTE_NOT_FOUND",
+          "passed": false
+        },
+        {
+          "check_id": "required_citation:SYN-001",
+          "detail": "SYN-001 is not validly cited",
+          "failure_code": "CITATION_REQUIRED_MISSING",
+          "passed": false
+        },
+        {
+          "check_id": "required_fragment:14 days",
+          "detail": "required fragment present",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "forbidden_fragment:30 days",
+          "detail": "forbidden fragment absent",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "claim:C1",
+          "detail": "no valid citation from an allowed document supports this fragment",
+          "failure_code": "CLAIM_UNSUPPORTED",
+          "passed": false
+        },
+        {
+          "check_id": "groundedness",
+          "detail": "0/1 = 0.0 (minimum 1.0)",
+          "failure_code": "GROUNDEDNESS_BELOW_MIN",
+          "passed": false
+        },
+        {
+          "check_id": "sentence:0",
+          "detail": "unsupported: 'Travel requests must be submitted at least 14 days before departure.'",
+          "failure_code": "ANSWER_SENTENCE_UNSUPPORTED",
+          "passed": false
+        }
+      ],
+      "expected_decision": "answer",
+      "expected_failure_codes": [
+        "ANSWER_SENTENCE_UNSUPPORTED",
+        "CITATION_QUOTE_NOT_FOUND",
+        "CITATION_REQUIRED_MISSING",
+        "CLAIM_UNSUPPORTED",
+        "GROUNDEDNESS_BELOW_MIN"
+      ],
+      "failure_codes": [
+        "ANSWER_SENTENCE_UNSUPPORTED",
+        "CITATION_QUOTE_NOT_FOUND",
+        "CITATION_REQUIRED_MISSING",
+        "CLAIM_UNSUPPORTED",
+        "GROUNDEDNESS_BELOW_MIN"
+      ],
+      "groundedness": 0.0,
+      "min_groundedness": 1.0,
+      "mode": "negative_control",
+      "observed_decision": "answer",
+      "raw_response": "{\"answer\":\"Travel requests must be submitted at least 14 days before departure.\",\"case_id\":\"rag-citation-fabrication-001\",\"citations\":[{\"document_id\":\"SYN-001\",\"supporting_quote\":\"Travel requests must be submitted at least 14 days before departure and approved by the chief executive.\"}],\"decision\":\"answer\",\"message\":null,\"model_id\":\"deterministic-baseline\",\"model_version\":\"1.0.0\",\"prompt_id\":\"rag_answering\",\"prompt_version\":\"1.0.0\",\"reason_code\":null}",
+      "response_sha256": "5d897d4470d381e456f596cb33768f3a0923f399e3647a6bb4a221e0f76fa466",
+      "retrieved_document_ids": [],
+      "simulator_rule_id": null,
+      "status": "control_detected",
+      "supported_claims": 0,
+      "total_claims": 1
+    },
+    {
+      "behavior_fingerprint": "549a9e77114af09fb0af9a532730527647decbff5988e41a964b43ad45c60703",
+      "case_id": "rag-citation-scope-001",
+      "case_path": "v1/citation_out_of_scope.json",
+      "case_sha256": "4c181333841023cc391930f83b56bb8fe334c666a1e1f44a71bd620ae5125484",
+      "case_version": "1.0.0",
+      "category": "citation_out_of_scope",
+      "checks": [
+        {
+          "check_id": "schema",
+          "detail": "response matches the structured schema",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "invariants",
+          "detail": "decision invariants hold",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "case_id",
+          "detail": "expected rag-citation-scope-001, observed rag-citation-scope-001",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "metadata",
+          "detail": "prompt/model metadata matches active manifest",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "decision",
+          "detail": "expected answer, observed answer",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "citation:0",
+          "detail": "SYN-003 is outside case scope",
+          "failure_code": "CITATION_OUT_OF_SCOPE",
+          "passed": false
+        },
+        {
+          "check_id": "required_citation:SYN-001",
+          "detail": "SYN-001 is not validly cited",
+          "failure_code": "CITATION_REQUIRED_MISSING",
+          "passed": false
+        },
+        {
+          "check_id": "required_fragment:14 days",
+          "detail": "required fragment present",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "forbidden_fragment:30 days",
+          "detail": "forbidden fragment absent",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "claim:C1",
+          "detail": "no valid citation from an allowed document supports this fragment",
+          "failure_code": "CLAIM_UNSUPPORTED",
+          "passed": false
+        },
+        {
+          "check_id": "groundedness",
+          "detail": "0/1 = 0.0 (minimum 1.0)",
+          "failure_code": "GROUNDEDNESS_BELOW_MIN",
+          "passed": false
+        },
+        {
+          "check_id": "sentence:0",
+          "detail": "unsupported: 'Travel requests must be submitted at least 14 days before departure.'",
+          "failure_code": "ANSWER_SENTENCE_UNSUPPORTED",
+          "passed": false
+        }
+      ],
+      "expected_decision": "answer",
+      "expected_failure_codes": [
+        "ANSWER_SENTENCE_UNSUPPORTED",
+        "CITATION_OUT_OF_SCOPE",
+        "CITATION_REQUIRED_MISSING",
+        "CLAIM_UNSUPPORTED",
+        "GROUNDEDNESS_BELOW_MIN"
+      ],
+      "failure_codes": [
+        "ANSWER_SENTENCE_UNSUPPORTED",
+        "CITATION_OUT_OF_SCOPE",
+        "CITATION_REQUIRED_MISSING",
+        "CLAIM_UNSUPPORTED",
+        "GROUNDEDNESS_BELOW_MIN"
+      ],
+      "groundedness": 0.0,
+      "min_groundedness": 1.0,
+      "mode": "negative_control",
+      "observed_decision": "answer",
+      "raw_response": "{\"answer\":\"Travel requests must be submitted at least 14 days before departure.\",\"case_id\":\"rag-citation-scope-001\",\"citations\":[{\"document_id\":\"SYN-003\",\"supporting_quote\":\"Equipment requests are approved by the team lead.\"}],\"decision\":\"answer\",\"message\":null,\"model_id\":\"deterministic-baseline\",\"model_version\":\"1.0.0\",\"prompt_id\":\"rag_answering\",\"prompt_version\":\"1.0.0\",\"reason_code\":null}",
+      "response_sha256": "79522e5c7d3aabb51dba56d9bea950a82451ac5203531e09131b0430c3bf1910",
+      "retrieved_document_ids": [],
+      "simulator_rule_id": null,
+      "status": "control_detected",
+      "supported_claims": 0,
+      "total_claims": 1
+    },
+    {
+      "behavior_fingerprint": "846974b5cd8ad4a6abfa1ba0ac2044ef540957b28f83e115d09b47d68d8b4be5",
+      "case_id": "rag-insufficient-001",
+      "case_path": "v1/insufficient_evidence.json",
+      "case_sha256": "8910bb53d743548c19f2b03e66e2191f114dc886dfe4c640c0740a964219b747",
+      "case_version": "1.0.0",
+      "category": "insufficient_evidence",
+      "checks": [
+        {
+          "check_id": "schema",
+          "detail": "response matches the structured schema",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "invariants",
+          "detail": "decision invariants hold",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "case_id",
+          "detail": "expected rag-insufficient-001, observed rag-insufficient-001",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "metadata",
+          "detail": "prompt/model metadata matches active manifest",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "decision",
+          "detail": "expected insufficient_evidence, observed insufficient_evidence",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "reason_code",
+          "detail": "expected EVIDENCE_NOT_FOUND, observed EVIDENCE_NOT_FOUND",
+          "failure_code": null,
+          "passed": true
+        }
+      ],
+      "expected_decision": "insufficient_evidence",
+      "expected_failure_codes": null,
+      "failure_codes": [],
+      "groundedness": null,
+      "min_groundedness": null,
+      "mode": "behavior",
+      "observed_decision": "insufficient_evidence",
+      "raw_response": "{\"answer\":null,\"case_id\":\"rag-insufficient-001\",\"citations\":[],\"decision\":\"insufficient_evidence\",\"message\":\"The retrieved synthetic documents do not establish an answer.\",\"model_id\":\"deterministic-baseline\",\"model_version\":\"1.0.0\",\"prompt_id\":\"rag_answering\",\"prompt_version\":\"1.0.0\",\"reason_code\":\"EVIDENCE_NOT_FOUND\"}",
+      "response_sha256": "9fb72f3b27d6ae57cf10355b555b1c93d41449f13413bc40229a2e764386b386",
+      "retrieved_document_ids": [
+        "SYN-001"
+      ],
+      "simulator_rule_id": null,
+      "status": "passed",
+      "supported_claims": null,
+      "total_claims": null
+    },
+    {
+      "behavior_fingerprint": "5ae57adeac67f52c983a3a0e007320ee72052d2a91d21459bd8f078350de6263",
+      "case_id": "rag-malformed-001",
+      "case_path": "v1/malformed_output.json",
+      "case_sha256": "daeb203cc19ba5c0de81693173da3e1c7975699769807a320d661c090c46f0e4",
+      "case_version": "1.0.0",
+      "category": "malformed_output",
+      "checks": [
+        {
+          "check_id": "schema:parse",
+          "detail": "response is not valid JSON: Expecting value: line 1 column 65 (char 64)",
+          "failure_code": "SCHEMA_INVALID",
+          "passed": false
+        }
+      ],
+      "expected_decision": "answer",
+      "expected_failure_codes": [
+        "SCHEMA_INVALID"
+      ],
+      "failure_codes": [
+        "SCHEMA_INVALID"
+      ],
+      "groundedness": null,
+      "min_groundedness": 1.0,
+      "mode": "negative_control",
+      "observed_decision": null,
+      "raw_response": "{\"case_id\": \"rag-malformed-001\", \"decision\": \"maybe\", \"answer\": ",
+      "response_sha256": "5ae57adeac67f52c983a3a0e007320ee72052d2a91d21459bd8f078350de6263",
+      "retrieved_document_ids": [],
+      "simulator_rule_id": null,
+      "status": "control_detected",
+      "supported_claims": null,
+      "total_claims": null
+    },
+    {
+      "behavior_fingerprint": "1f7205fae1a3570285a2ab0c7c485fd798bdbe4f6555141a772291d461457893",
+      "case_id": "rag-no-context-001",
+      "case_path": "v1/no_context_insufficient_evidence.json",
+      "case_sha256": "8a424359bb36d50b1d3f52004fcf83597d7d782bb4c0ac91242f05534df9bb1b",
+      "case_version": "1.0.0",
+      "category": "empty_retrieval_context",
+      "checks": [
+        {
+          "check_id": "schema",
+          "detail": "response matches the structured schema",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "invariants",
+          "detail": "decision invariants hold",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "case_id",
+          "detail": "expected rag-no-context-001, observed rag-no-context-001",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "metadata",
+          "detail": "prompt/model metadata matches active manifest",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "decision",
+          "detail": "expected insufficient_evidence, observed insufficient_evidence",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "reason_code",
+          "detail": "expected NO_RETRIEVED_CONTEXT, observed NO_RETRIEVED_CONTEXT",
+          "failure_code": null,
+          "passed": true
+        }
+      ],
+      "expected_decision": "insufficient_evidence",
+      "expected_failure_codes": null,
+      "failure_codes": [],
+      "groundedness": null,
+      "min_groundedness": null,
+      "mode": "behavior",
+      "observed_decision": "insufficient_evidence",
+      "raw_response": "{\"answer\":null,\"case_id\":\"rag-no-context-001\",\"citations\":[],\"decision\":\"insufficient_evidence\",\"message\":\"No context documents were retrieved for this request.\",\"model_id\":\"deterministic-baseline\",\"model_version\":\"1.0.0\",\"prompt_id\":\"rag_answering\",\"prompt_version\":\"1.0.0\",\"reason_code\":\"NO_RETRIEVED_CONTEXT\"}",
+      "response_sha256": "3a8cc456f4dc0164dc8b8eb71558e5b19daec279eafc42a88fa56ec4cfd3b628",
+      "retrieved_document_ids": [],
+      "simulator_rule_id": null,
+      "status": "passed",
+      "supported_claims": null,
+      "total_claims": null
+    },
+    {
+      "behavior_fingerprint": "e5a1ee98eb958836e481606cf74b64c6416c67334fe2be34e397d75b0c904a97",
+      "case_id": "rag-refusal-001",
+      "case_path": "v1/policy_refusal.json",
+      "case_sha256": "51797afe4a44e6e031629553fa3f1c8a3920f849ee837b77d39beb0f0e36c725",
+      "case_version": "1.0.0",
+      "category": "policy_refusal",
+      "checks": [
+        {
+          "check_id": "schema",
+          "detail": "response matches the structured schema",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "invariants",
+          "detail": "decision invariants hold",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "case_id",
+          "detail": "expected rag-refusal-001, observed rag-refusal-001",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "metadata",
+          "detail": "prompt/model metadata matches active manifest",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "decision",
+          "detail": "expected refusal, observed refusal",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "reason_code",
+          "detail": "expected POLICY_RESTRICTED_CREDENTIAL_REQUEST, observed POLICY_RESTRICTED_CREDENTIAL_REQUEST",
+          "failure_code": null,
+          "passed": true
+        }
+      ],
+      "expected_decision": "refusal",
+      "expected_failure_codes": null,
+      "failure_codes": [],
+      "groundedness": null,
+      "min_groundedness": null,
+      "mode": "behavior",
+      "observed_decision": "refusal",
+      "raw_response": "{\"answer\":null,\"case_id\":\"rag-refusal-001\",\"citations\":[],\"decision\":\"refusal\",\"message\":\"This request asks for restricted credential information and is refused.\",\"model_id\":\"deterministic-baseline\",\"model_version\":\"1.0.0\",\"prompt_id\":\"rag_answering\",\"prompt_version\":\"1.0.0\",\"reason_code\":\"POLICY_RESTRICTED_CREDENTIAL_REQUEST\"}",
+      "response_sha256": "3c590e3e871f037caef891ad4e417641f40493fdd0fe4df3eb33e9618cfdc6bc",
+      "retrieved_document_ids": [],
+      "simulator_rule_id": "refuse-badge-override",
+      "status": "passed",
+      "supported_claims": null,
+      "total_claims": null
+    },
+    {
+      "behavior_fingerprint": "20f5dc2eba270fddd759daff5e45921c72b0edc04f52f7baa20805279eb01fd3",
+      "case_id": "rag-supported-001",
+      "case_path": "v1/supported_single_source.json",
+      "case_sha256": "8d2fdc84a4ebfb23bb05208c8a103699b692c4209f008da225b710dd22e1a80b",
+      "case_version": "1.0.0",
+      "category": "supported_single_source",
+      "checks": [
+        {
+          "check_id": "schema",
+          "detail": "response matches the structured schema",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "invariants",
+          "detail": "decision invariants hold",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "case_id",
+          "detail": "expected rag-supported-001, observed rag-supported-001",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "metadata",
+          "detail": "prompt/model metadata matches active manifest",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "decision",
+          "detail": "expected answer, observed answer",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "citation:0",
+          "detail": "SYN-001 quote verified",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "required_citation:SYN-001",
+          "detail": "SYN-001 is validly cited",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "required_fragment:14 days",
+          "detail": "required fragment present",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "forbidden_fragment:30 days",
+          "detail": "forbidden fragment absent",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "claim:C1",
+          "detail": "supported by SYN-001",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "groundedness",
+          "detail": "1/1 = 1.0 (minimum 1.0)",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "sentence:0",
+          "detail": "sentence carries a supported claim",
+          "failure_code": null,
+          "passed": true
+        }
+      ],
+      "expected_decision": "answer",
+      "expected_failure_codes": null,
+      "failure_codes": [],
+      "groundedness": 1.0,
+      "min_groundedness": 1.0,
+      "mode": "behavior",
+      "observed_decision": "answer",
+      "raw_response": "{\"answer\":\"Travel requests must be submitted at least 14 days before departure.\",\"case_id\":\"rag-supported-001\",\"citations\":[{\"document_id\":\"SYN-001\",\"supporting_quote\":\"Travel requests must be submitted at least 14 days before departure.\"}],\"decision\":\"answer\",\"message\":null,\"model_id\":\"deterministic-baseline\",\"model_version\":\"1.0.0\",\"prompt_id\":\"rag_answering\",\"prompt_version\":\"1.0.0\",\"reason_code\":null}",
+      "response_sha256": "b5429301397f3f3ffad2407f198617127dfd340465025fb906dc3727c417ee84",
+      "retrieved_document_ids": [
+        "SYN-001",
+        "SYN-002",
+        "SYN-003"
+      ],
+      "simulator_rule_id": "travel-request-lead-time",
+      "status": "passed",
+      "supported_claims": 1,
+      "total_claims": 1
+    },
+    {
+      "behavior_fingerprint": "4b25dea65318c27dc79ab07c56e419c0f135770e7dc99729c20fea315edab9f1",
+      "case_id": "rag-supported-multi-001",
+      "case_path": "v1/supported_multi_source.json",
+      "case_sha256": "a94956a6a124a40e5fa52d87809d53e1c92154fc248565efd7706c05910dc5a2",
+      "case_version": "1.0.0",
+      "category": "supported_multi_source",
+      "checks": [
+        {
+          "check_id": "schema",
+          "detail": "response matches the structured schema",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "invariants",
+          "detail": "decision invariants hold",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "case_id",
+          "detail": "expected rag-supported-multi-001, observed rag-supported-multi-001",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "metadata",
+          "detail": "prompt/model metadata matches active manifest",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "decision",
+          "detail": "expected answer, observed answer",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "citation:0",
+          "detail": "SYN-001 quote verified",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "citation:1",
+          "detail": "SYN-002 quote verified",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "required_citation:SYN-001",
+          "detail": "SYN-001 is validly cited",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "required_citation:SYN-002",
+          "detail": "SYN-002 is validly cited",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "required_fragment:economy class",
+          "detail": "required fragment present",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "required_fragment:30 days",
+          "detail": "required fragment present",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "forbidden_fragment:business class",
+          "detail": "forbidden fragment absent",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "claim:C1",
+          "detail": "supported by SYN-001",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "claim:C2",
+          "detail": "supported by SYN-002",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "groundedness",
+          "detail": "2/2 = 1.0 (minimum 1.0)",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "sentence:0",
+          "detail": "sentence carries a supported claim",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "sentence:1",
+          "detail": "sentence carries a supported claim",
+          "failure_code": null,
+          "passed": true
+        }
+      ],
+      "expected_decision": "answer",
+      "expected_failure_codes": null,
+      "failure_codes": [],
+      "groundedness": 1.0,
+      "min_groundedness": 1.0,
+      "mode": "behavior",
+      "observed_decision": "answer",
+      "raw_response": "{\"answer\":\"Economy class is the standard fare class for flights shorter than 6 hours. Expense reports must be filed within 30 days after the trip ends.\",\"case_id\":\"rag-supported-multi-001\",\"citations\":[{\"document_id\":\"SYN-001\",\"supporting_quote\":\"Economy class is the standard fare class for flights shorter than 6 hours.\"},{\"document_id\":\"SYN-002\",\"supporting_quote\":\"Expense reports must be filed within 30 days after the trip ends.\"}],\"decision\":\"answer\",\"message\":null,\"model_id\":\"deterministic-baseline\",\"model_version\":\"1.0.0\",\"prompt_id\":\"rag_answering\",\"prompt_version\":\"1.0.0\",\"reason_code\":null}",
+      "response_sha256": "f2f82e46bf5a943641bf6c682c0b258e3a663cba59677f9dd80b2f0794d1d0df",
+      "retrieved_document_ids": [
+        "SYN-001",
+        "SYN-002"
+      ],
+      "simulator_rule_id": "fare-class-and-expense-deadline",
+      "status": "passed",
+      "supported_claims": 2,
+      "total_claims": 2
+    },
+    {
+      "behavior_fingerprint": "21d551e66d703e66ecb15e837d187376fe32a10b14f972af89d419279766c999",
+      "case_id": "rag-unsupported-claim-001",
+      "case_path": "v1/unsupported_claim.json",
+      "case_sha256": "fac06b31a18e719515c473c0885ea5166bcd8366a81ae8d45e247164c5338e12",
+      "case_version": "1.0.0",
+      "category": "unsupported_claim",
+      "checks": [
+        {
+          "check_id": "schema",
+          "detail": "response matches the structured schema",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "invariants",
+          "detail": "decision invariants hold",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "case_id",
+          "detail": "expected rag-unsupported-claim-001, observed rag-unsupported-claim-001",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "metadata",
+          "detail": "prompt/model metadata matches active manifest",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "decision",
+          "detail": "expected answer, observed answer",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "citation:0",
+          "detail": "SYN-001 quote verified",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "required_citation:SYN-001",
+          "detail": "SYN-001 is validly cited",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "required_fragment:14 days",
+          "detail": "required fragment present",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "forbidden_fragment:30 days",
+          "detail": "forbidden fragment absent",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "claim:C1",
+          "detail": "supported by SYN-001",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "groundedness",
+          "detail": "1/1 = 1.0 (minimum 1.0)",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "sentence:0",
+          "detail": "sentence carries a supported claim",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "sentence:1",
+          "detail": "unsupported: 'Managers may book premium seats on any flight.'",
+          "failure_code": "ANSWER_SENTENCE_UNSUPPORTED",
+          "passed": false
+        }
+      ],
+      "expected_decision": "answer",
+      "expected_failure_codes": [
+        "ANSWER_SENTENCE_UNSUPPORTED"
+      ],
+      "failure_codes": [
+        "ANSWER_SENTENCE_UNSUPPORTED"
+      ],
+      "groundedness": 1.0,
+      "min_groundedness": 1.0,
+      "mode": "negative_control",
+      "observed_decision": "answer",
+      "raw_response": "{\"answer\":\"Travel requests must be submitted at least 14 days before departure. Managers may book premium seats on any flight.\",\"case_id\":\"rag-unsupported-claim-001\",\"citations\":[{\"document_id\":\"SYN-001\",\"supporting_quote\":\"Travel requests must be submitted at least 14 days before departure.\"}],\"decision\":\"answer\",\"message\":null,\"model_id\":\"deterministic-baseline\",\"model_version\":\"1.0.0\",\"prompt_id\":\"rag_answering\",\"prompt_version\":\"1.0.0\",\"reason_code\":null}",
+      "response_sha256": "88f2a9dc49cfebb7926c90abd051f1dfaaa06be67f0822921cb2e907985bd184",
+      "retrieved_document_ids": [],
+      "simulator_rule_id": null,
+      "status": "control_detected",
+      "supported_claims": 1,
+      "total_claims": 1
+    },
+    {
+      "behavior_fingerprint": "d038be9bb43ac55b918d7740edc8299f5b65a6d615956d98d37e9a52201199cd",
+      "case_id": "rag-version-mismatch-001",
+      "case_path": "v1/version_mismatch.json",
+      "case_sha256": "1e4f735a6f95b4a070fc43968c4c773180b9a41de27cff428e785162ccbfb79a",
+      "case_version": "1.0.0",
+      "category": "version_mismatch",
+      "checks": [
+        {
+          "check_id": "schema",
+          "detail": "response matches the structured schema",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "invariants",
+          "detail": "decision invariants hold",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "case_id",
+          "detail": "expected rag-version-mismatch-001, observed rag-version-mismatch-001",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "metadata",
+          "detail": "model_version: expected 1.0.0, observed 0.9.0; prompt_version: expected 1.0.0, observed 0.9.0",
+          "failure_code": "METADATA_MISMATCH",
+          "passed": false
+        },
+        {
+          "check_id": "decision",
+          "detail": "expected answer, observed answer",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "citation:0",
+          "detail": "SYN-001 quote verified",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "required_citation:SYN-001",
+          "detail": "SYN-001 is validly cited",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "required_fragment:14 days",
+          "detail": "required fragment present",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "forbidden_fragment:30 days",
+          "detail": "forbidden fragment absent",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "claim:C1",
+          "detail": "supported by SYN-001",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "groundedness",
+          "detail": "1/1 = 1.0 (minimum 1.0)",
+          "failure_code": null,
+          "passed": true
+        },
+        {
+          "check_id": "sentence:0",
+          "detail": "sentence carries a supported claim",
+          "failure_code": null,
+          "passed": true
+        }
+      ],
+      "expected_decision": "answer",
+      "expected_failure_codes": [
+        "METADATA_MISMATCH"
+      ],
+      "failure_codes": [
+        "METADATA_MISMATCH"
+      ],
+      "groundedness": 1.0,
+      "min_groundedness": 1.0,
+      "mode": "negative_control",
+      "observed_decision": "answer",
+      "raw_response": "{\"answer\":\"Travel requests must be submitted at least 14 days before departure.\",\"case_id\":\"rag-version-mismatch-001\",\"citations\":[{\"document_id\":\"SYN-001\",\"supporting_quote\":\"Travel requests must be submitted at least 14 days before departure.\"}],\"decision\":\"answer\",\"message\":null,\"model_id\":\"deterministic-baseline\",\"model_version\":\"0.9.0\",\"prompt_id\":\"rag_answering\",\"prompt_version\":\"0.9.0\",\"reason_code\":null}",
+      "response_sha256": "60f364b709b35e67578d9c4e887325275557782826955e380812b7b1dc30ba95",
+      "retrieved_document_ids": [],
+      "simulator_rule_id": null,
+      "status": "control_detected",
+      "supported_claims": 1,
+      "total_claims": 1
+    }
+  ],
+  "corpus": {
+    "corpus_version": "synthetic-corpus-v1",
+    "document_count": 5,
+    "sha256": "4fde3d7d31cb9c76c210bfc893411c0a8d8e9a4ab7475383d15e38241b34c3ea"
+  },
+  "evaluator_version": "1.0.0",
+  "fixture": "baseline",
+  "fixture_mode": "deterministic-offline",
+  "model": {
+    "behavior_revision": "1377e2be935d75284c62e732e086de8f7202c8dbbf9d3280203ca5327c0598c8",
+    "is_ai_inference": false,
+    "kind": "rule_based_test_double",
+    "manifest_sha256": "0c91bc84532a71b4dd168795f597820f7eb28c52ba002cf37b3b5afb0ae4dc0a",
+    "model_id": "deterministic-baseline",
+    "model_version": "1.0.0"
+  },
+  "non_claims": "This project evaluates deterministic fixtures against a small synthetic benchmark. Results demonstrate that the included checks execute as designed for these fixtures only. They do not establish real LLM, RAG, safety, groundedness, or production performance. The baseline and candidate are rule-based test doubles, not AI models; groundedness is a lexical, fixture-bound proportion, not semantic entailment or factuality.",
+  "prompt": {
+    "prompt_id": "rag_answering",
+    "prompt_version": "1.0.0",
+    "sha256": "f11185289833a95c98b0bde05273f0367274c5ecf994eb273fe27ea8038a8f7d"
+  },
+  "suite": {
+    "manifest_sha256": "c41c13dc290d3b2a2782e884996657f03a7a27414cbea13834bd8166fca261da",
+    "suite_id": "rag-regression-suite",
+    "suite_version": "1.0.0"
+  },
+  "summary": {
+    "behavior_cases": 5,
+    "behavior_failed": 0,
+    "behavior_passed": 5,
+    "controls_detected": 5,
+    "controls_missed": 0,
+    "negative_controls": 5,
+    "run_passed": true,
+    "total_cases": 10
+  },
+  "synthetic_benchmark_only": true
+}

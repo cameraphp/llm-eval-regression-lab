@@ -1,0 +1,27 @@
+{
+  "case_id": "rag-insufficient-001",
+  "case_version": "1.0.0",
+  "suite_version": "1.0.0",
+  "category": "insufficient_evidence",
+  "mode": "behavior",
+  "synthetic_fixture_note": "Synthetic fixture: fictional question about the made-up 'Example Org' synthetic corpus. Not real policy, user, or customer data. In scope (travel) but no synthetic document states a meal allowance.",
+  "input": {
+    "question": "What is the per-diem meal allowance for travel?"
+  },
+  "retrieval_scope": [
+    "SYN-001",
+    "SYN-002"
+  ],
+  "expected": {
+    "decision": "insufficient_evidence",
+    "reason_code": "EVIDENCE_NOT_FOUND",
+    "required_answer_fragments": [],
+    "forbidden_answer_fragments": [
+      "allowance is",
+      "credits per day"
+    ],
+    "required_citations": [],
+    "claims": [],
+    "min_groundedness": null
+  }
+}
